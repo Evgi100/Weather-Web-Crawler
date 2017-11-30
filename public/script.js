@@ -6,6 +6,9 @@ function grabDate(){
      
 }
 
+function convert(data){
+   return Math.round(data-273.15)
+}
 
 // {{temp.temp-273.15}} °C / {{1.8 x (temp.temp-273.15) + 32}}
 function fetch(currentCity) {
@@ -17,7 +20,7 @@ function fetch(currentCity) {
             var city={
                 name:data.name,
                 temp: data.main,
-                currentCel:Math.round(data.main.temp-273.15),
+                currentCel:convert(data.main.temp),
                 currentFar:Math.round((data.main.temp-273.15)*1.8+32),
                 minTempC:Math.round(data.main.temp_min-273.15),
                 maxTempC:Math.round(data.main.temp_max-273.15),
@@ -39,9 +42,9 @@ function fetch(currentCity) {
 }
 
 function grabUserData() {
-    var cityName = $("#userInput").val();
+    currentCity = $("#userInput").val();
     $("#userInput").val('');
-    currentCity=cityName;
+    
 }
 
 function _renderCityTemps(userCities){
@@ -59,6 +62,8 @@ function createComment(postIndex, newComment) {
     if (newComment) {
         userCities[postIndex].comments.push(newComment);
         renderComments(postIndex);
+        // _renderCityTemps(userCities);
+
     }
     else {
         alert('theres no text in yours comment');
@@ -66,7 +71,9 @@ function createComment(postIndex, newComment) {
 }
 
 function renderComments(postIndex) {
-    var $comments = $('.comments');
+    // var $comments = $('.post').indexOf(postIndex);
+    var $comments = $('.comments').eq(postIndex)
+
     $comments.empty();
 
     userCities[postIndex].comments.forEach(function (comment) {
@@ -86,8 +93,7 @@ $('.postCities').on('click','.commentButton', function(){
 
     createComment(postIndex, commentText);
 });
-function _renderComments(){
-}
+
 
 $("#search").on('click', function () {
     grabUserData();

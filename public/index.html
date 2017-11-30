@@ -33,8 +33,9 @@
     </div>
 
     <script id="store-template" type="text/x-handlebars-template">
-        <div class="row align">
-            <div class="col-xs-12 cities ">
+        <div class="row align post">
+            <div class="col-xs-12 cities">
+
                 <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
                 <div class="cityName">{{name}}, {{sys.country}} <img class="weather-icon" src="http://openweathermap.org/img/w/{{description.0.icon}}.png"></div>
                 <div class="currentTemp"><span> Current temp: {{currentCel}} °C / {{currentFar}}°F at 14:37 on date<span></div>
@@ -44,18 +45,23 @@
                     <span class="block pressure"><i class="fa fa-thermometer-3"></i> Pressure: {{temp.pressure}} hpa</span>
                     <span class="block highLow"><i class="fa fa-cloud"></i> Low:{{minTempC}}°C /<i class="fa fa-sun-o"></i> High:{{maxTempC}}°C </span>
                 </div>
-            </div>
+                <div class=" align input-group">
+                        <input type="text" class="form-control" placeholder="Comment about the weather in {{name}}">
+                        <span class="input-group-btn">
+                                <button class="btn btn-success commentButton" type="button">Comment</button>
+                        </span>
         
-            <div class="row align input-group">
-                <input type="text" class="form-control" placeholder="Comment about the weather in {{name}}">
-                <span class="input-group-btn">
-                        <button class="btn btn-success commentButton" type="button">Comment</button>
-                </span>
+                    </div>
+                    <div style="margin-left:15px;">Comments:</div>
+                    <div class="comments">
+                        {{#each comments}}
+                        <div>{{this}}</div>
+                        {{/each}}
+                    </div>
 
             </div>
-            <div style="margin-left:15px;">Comments:</div>
-            <div class="comments">
-            </div>
+        
+            
         </div>
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcrziC5YUCRtuqnocJxE4zg0ubcmnN9Tw&libraries=places"></script>
