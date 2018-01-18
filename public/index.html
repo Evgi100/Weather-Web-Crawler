@@ -37,13 +37,13 @@
             <div class="col-xs-12 cities">
 
                 <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-                <div class="cityName">{{name}}, {{sys.country}} <img class="weather-icon" src="http://openweathermap.org/img/w/{{description.0.icon}}.png"></div>
-                <div class="currentTemp"><span> Current temp: {{currentCel}} °C / {{currentFar}}°F at 14:37 on date<span></div>
+                <div class="cityName">{{locationName}} <img class="weather-icon" src="{{icon}}"></div>
+                <div class="currentTemp"><span> Current temp: {{temparature}} {{condition}} at {{date}}<span></div>
                                 <hr>
                                 <div>
-                                    <span class="block humidity"><i class="fa fa-tint"></i> Humidity: {{temp.humidity}} % </span>
-                    <span class="block pressure"><i class="fa fa-thermometer-3"></i> Pressure: {{temp.pressure}} hpa</span>
-                    <span class="block highLow"><i class="fa fa-cloud"></i> Low:{{minTempC}}°C /<i class="fa fa-sun-o"></i> High:{{maxTempC}}°C </span>
+                                    <span class="block humidity"><i class="fa fa-tint"></i> Humidity: {{humidity}}  </span>
+                    <span class="block pressure"><i class="fa fa-cloud"></i> Wind Speed: {{windSpeed}} </span>
+                    <!-- <span class="block highLow"><i class="fa fa-cloud"></i> Low:{{minTempC}}°C /<i class="fa fa-sun-o"></i> High:{{maxTempC}}°C </span> -->
                 </div>
                 <div class=" align input-group">
                         <input type="text" class="form-control" placeholder="Comment about the weather in {{name}}">
