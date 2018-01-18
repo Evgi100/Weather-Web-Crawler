@@ -1,23 +1,23 @@
 var currentCity;
-var userCities=[];
+var userCities = [];
 
- function RemoveCountriesStrFromLocation(full_input) { // NOTE: helper function
+function RemoveCountriesStrFromLocation(full_input) { // NOTE: helper function
     var result = full_input;
     var indexOfFirstComma = full_input.indexOf(",");
     if (indexOfFirstComma > 0) { // Comma exists
-      var result = full_input.substring(0, indexOfFirstComma);
+        var result = full_input.substring(0, indexOfFirstComma);
     }
 
     return result;
- }
+}
 
 function fetch(currentCity) {
     $.ajax({
-        method:'GET',
-        url: '/weather/'+RemoveCountriesStrFromLocation(currentCity)+'',
+        method: 'GET',
+        url: '/weather/' + RemoveCountriesStrFromLocation(currentCity) + '',
         success: function (data) {
             //update the userData using API data
-    
+            console.log(data)
             userCities.push(data);
             console.log(userCities);
             _renderCityTemps(userCities);
@@ -32,15 +32,15 @@ function fetch(currentCity) {
 function grabUserData() {
     currentCity = $("#userInput").val();
     $("#userInput").val('');
-    
+
 }
 
-function _renderCityTemps(userCities){
+function _renderCityTemps(userCities) {
     $('.postCities').empty();
     var source = $('#store-template').html();
     var template = Handlebars.compile(source);
-    
-    userCities.forEach(function(city){
+
+    userCities.forEach(function (city) {
         var newHTML = template(city);
         $('.postCities').append(newHTML);
     });
@@ -62,21 +62,30 @@ function renderComments(postIndex) {
     $comments.empty();
 
     userCities[postIndex].comments.forEach(function (comment) {
-        $comments.append('<div class = "row"><button type="button" class="btn btn-circle">\
-    </button><div class="postComment col-lg-6">' + comment + '\
+        $comments.append('<div class = "row"><div class="postComment col-lg-6">' + comment + '\
     </div><button class="btn btn-xs btn-danger col-lg-6 glyphicon glyphicon-trash deleteComment"></button></div>');
     });
 
 }
 
-$('.postCities').on('click','.commentButton', function(){
-   var commentText = $(this).offsetParent().siblings('input').val();
-   $(this).offsetParent().siblings('input').val('');
+$('.postCities').on('click', '.commentButton', function () {
+    var commentText = $(this).offsetParent().siblings('input').val();
+    $(this).offsetParent().siblings('input').val('');
 
     var postIndex = $('.commentButton').index($(this));
 
     createComment(postIndex, commentText);
 });
+
+
+$('#userInput').keypress(function (e) {
+    var key = e.which;
+    if (key === 13) {
+        grabUserData();
+        fetch(currentCity);
+    }
+
+})
 
 
 $("#search").on('click', function () {

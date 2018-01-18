@@ -15,14 +15,18 @@
 
     <div class="container-fluid">
         <div class="page-header">
-            <h1>Weather Chat</h1>
+            <h1>Weather Chat
+                    <div class="loading-icon"></div>
+            </h1>
+
             <div class="row">
                 <div class="col-xs-12">
                     <div class="input-group form-group">
-                        <input id="userInput" type="text" class="form-control" placeholder="Search City">
+                        <input id="userInput" type="text" class="form-control" placeholder="Search City" />
                         <span class="input-group-btn">
-                    <button id="search" class="btn btn-primary" type="button"><i class="fa fa-search"></i> Search For Temp</button>
-                </span>
+                            <button id="search" class="btn btn-primary" type="submit">
+                                <i class="fa fa-search"></i> Search For Temp</button>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -33,9 +37,8 @@
     </div>
 
     <script id="store-template" type="text/x-handlebars-template">
-        <div class="row align post">
+        <div class="row">
             <div class="col-xs-12 cities">
-
                 <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
                 <div class="cityName">{{locationName}} <img class="weather-icon" src="{{icon}}"></div>
                 <div class="currentTemp"><span>  {{condition}} at {{date}}<span></div>

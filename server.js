@@ -12,7 +12,7 @@ app.use(express.static('public'));
 app.use(express.static(__dirname + '/node_modules'));
 
 app.get('/weather/:location',function(req,res){
-// try{
+
     const url = `https://www.theweathernetwork.com/ca/search?q=${req.params.location}`
 
     request(url, function (error, response, html) {
