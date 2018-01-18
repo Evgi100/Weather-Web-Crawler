@@ -3,7 +3,6 @@ const request = require('request'); // make HTTP requests
 const cheerio = require('cheerio'); // Implementation of core jQuery specifically for the server
 const phantom = require('phantom');
 
-const fs = require('fs');
 const app = express();
 
 

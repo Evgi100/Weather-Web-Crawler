@@ -1,17 +1,20 @@
 var currentCity;
 var userCities=[];
 
+ function RemoveCountriesStrFromLocation(full_input) { // NOTE: helper function
+    var result = full_input;
+    var indexOfFirstComma = full_input.indexOf(",");
+    if (indexOfFirstComma > 0) { // Comma exists
+      var result = full_input.substring(0, indexOfFirstComma);
+    }
 
+    return result;
+ }
 
-function convert(data){
-   return Math.round(data-273.15)
-}
-
-// {{temp.temp-273.15}} °C / {{1.8 x (temp.temp-273.15) + 32}}
 function fetch(currentCity) {
     $.ajax({
         method:'GET',
-        url: '/weather/'+currentCity+'',
+        url: '/weather/'+RemoveCountriesStrFromLocation(currentCity)+'',
         success: function (data) {
             //update the userData using API data
     
@@ -47,8 +50,6 @@ function createComment(postIndex, newComment) {
     if (newComment) {
         userCities[postIndex].comments.push(newComment);
         renderComments(postIndex);
-        // _renderCityTemps(userCities);
-
     }
     else {
         alert('theres no text in yours comment');
@@ -56,7 +57,6 @@ function createComment(postIndex, newComment) {
 }
 
 function renderComments(postIndex) {
-    // var $comments = $('.post').indexOf(postIndex);
     var $comments = $('.comments').eq(postIndex)
 
     $comments.empty();
@@ -65,7 +65,6 @@ function renderComments(postIndex) {
         $comments.append('<div class = "row"><button type="button" class="btn btn-circle">\
     </button><div class="postComment col-lg-6">' + comment + '\
     </div><button class="btn btn-xs btn-danger col-lg-6 glyphicon glyphicon-trash deleteComment"></button></div>');
-
     });
 
 }
